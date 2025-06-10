@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-BgjkM8IIq5NBOvfmpbLBSmYRUj0v0",
+  "object": "chat.completion",
+  "created": 1749525326,
+  "model": "gpt-4-0613",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "--- ANÁLISIS DE CLASES EXISTENTES ---\n\n| Clase Java | Package | Clasificación | Motivo |\n|------------|---------|----------------|--------|\n| Employee | test.core.api.model | REUTILIZABLE-AS-IS | Contiene atributo `gender` y `birthDate` necesarios para las historias de usuario |\n| EmployeeRepository | test.core.api.repository | MODIFICABLE | Se necesita agregar un método para obtener empleados nacidos antes del año 2000 |\n| EmployeeService | N/A | NUEVA | Se necesita para implementar la lógica de negocio |\n| EmployeeController | N/A | NUEVA | Se necesita para exponer los endpoints |\n| CannotDeleteEmployeeException | N/A | NUEVA | Se necesita para lanzar excepción cuando se intenta eliminar un empleado femenino |\n| EmployeeServiceTest | N/A | NUEVA | Pruebas unitarias para la lógica de negocio |\n\n--- INSTRUCCIONES DE MODIFICACIÓN ---\n- En la clase `EmployeeRepository`, se debe agregar un método para obtener los empleados que nacieron antes del año 2000.\n- Se debe crear la clase `EmployeeService` para implementar la lógica de negocio. Esta clase debe tener un método para eliminar empleados que lance una excepción si se intenta eliminar un empleado femenino y otro método para obtener los empleados que nacieron antes del año 2000.\n- Se debe crear la clase `EmployeeController` para exponer los endpoints. Esta clase debe tener un endpoint para eliminar empleados y otro para obtener los empleados que nacieron antes del año 2000.\n- Se debe crear la clase `CannotDeleteEmployeeException` para lanzar una excepción cuando se intenta eliminar un empleado femenino.\n- Se debe crear la clase `EmployeeServiceTest` para las pruebas unitarias de la lógica de negocio. Esta clase debe tener pruebas para los métodos de eliminar empleados y obtener los empleados que nacieron antes del año 2000.",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1544,
+    "completion_tokens": 438,
+    "total_tokens": 1982,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}

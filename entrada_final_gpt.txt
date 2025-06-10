@@ -1,0 +1,66 @@
+--- HISTORIA DE USUARIO ---
+id: HDU-EMP-001
+titulo: Prevenir eliminación de empleadas
+actor: Administrador del sistema
+descripcion: 
+  Como administrador del sistema,
+  quiero que no se permita eliminar empleados de género femenino,
+  para cumplir con la normativa interna de no eliminar registros históricos sensibles.
+criterios_aceptacion:
+  - Si se intenta eliminar un empleado con género "Femenino", se debe lanzar una excepción o retornar un error controlado.
+  - Si el empleado es de género "Masculino" u otro valor, se permite la eliminación normal.
+  - El método de eliminación actual debe ser modificado para incluir esta validación.
+  - No debe eliminarse ninguna lógica existente que ya esté implementada en ese método.
+  - Se deben mantener todos los métodos actuales sin eliminación ni reemplazo.
+  - La modificación debe estar delimitada por comentarios que indiquen claramente el inicio y fin del cambio realizado por la IA.
+
+id: HDU-EMP-002
+titulo: Empleados nacidos antes del 2000
+actor: Administrador del sistema
+descripcion: 
+  Como administrador del sistema
+  quiero obtener una lista de empleados que hayan nacido antes del año 2000
+  para poder segmentar a los empleados  por generaciones y aplicar políticas diferenciadas
+criterios_aceptacion:
+  - Se debe crear un nuevo end-point para esta consulta
+  - Se deben mantener todos los métodos actuales sin eliminación ni reemplazo.
+  - La modificación debe estar delimitada por comentarios que indiquen claramente el inicio y fin del cambio realizado por la IA.
+
+
+--- DIAGNÓSTICO Y PLAN DE CLASES ---
+--- ANÁLISIS DE CLASES EXISTENTES ---
+
+| Clase Java | Package | Clasificación | Motivo |
+|------------|---------|----------------|--------|
+| Employee | test.core.api.model | REUTILIZABLE-AS-IS | Contiene atributo `gender` y `birthDate` necesarios para las historias de usuario |
+| EmployeeRepository | test.core.api.repository | MODIFICABLE | Se necesita agregar un método para obtener empleados nacidos antes del año 2000 |
+| EmployeeService | N/A | NUEVA | Se necesita para implementar la lógica de negocio |
+| EmployeeController | N/A | NUEVA | Se necesita para exponer los endpoints |
+| CannotDeleteEmployeeException | N/A | NUEVA | Se necesita para lanzar excepción cuando se intenta eliminar un empleado femenino |
+| EmployeeServiceTest | N/A | NUEVA | Pruebas unitarias para la lógica de negocio |
+
+--- INSTRUCCIONES DE MODIFICACIÓN ---
+- En la clase `EmployeeRepository`, se debe agregar un método para obtener los empleados que nacieron antes del año 2000.
+- Se debe crear la clase `EmployeeService` para implementar la lógica de negocio. Esta clase debe tener un método para eliminar empleados que lance una excepción si se intenta eliminar un empleado femenino y otro método para obtener los empleados que nacieron antes del año 2000.
+- Se debe crear la clase `EmployeeController` para exponer los endpoints. Esta clase debe tener un endpoint para eliminar empleados y otro para obtener los empleados que nacieron antes del año 2000.
+- Se debe crear la clase `CannotDeleteEmployeeException` para lanzar una excepción cuando se intenta eliminar un empleado femenino.
+- Se debe crear la clase `EmployeeServiceTest` para las pruebas unitarias de la lógica de negocio. Esta clase debe tener pruebas para los métodos de eliminar empleados y obtener los empleados que nacieron antes del año 2000.
+
+--- INSTRUCCIONES DE GENERACIÓN DE CÓDIGO ---
+- Modifica únicamente las clases marcadas como MODIFICABLE.
+- Crea nuevas clases solo si están indicadas como NUEVA.
+- No cambies de paquete ni nombre de clase.
+- Si modificas un método, inclúyelo completo con su lógica anterior más la nueva.
+- No omitas lógica existente.
+- Cada clase debe comenzar con `package ...`.
+- Devuelve únicamente clases y tests JUnit 5 válidos.
+- No incluyas explicaciones ni comentarios adicionales.
+- Si una clase existente implementa una interfaz, o hereda de otra clase, debes mantener esa declaración `implements o extends ...`.
+- No elimines implementaciones de interfaces ya declaradas.
+- La firma de las clases y métodos debe mantenerse sin cambio a menos que la nueva funcionalidad lo requiera
+- Si se crea una llamada a un método de la clase modificada asegúrate que ese método exista en la clase
+- Si se crea una llamada a un método de otra clase asegúrate que ese método exista en la clase o créalo de ser necesario
+- Asegurate que el el código generado sea compilable, corríjelo hasta que lo sea
+- Nunca uses el método stream() u otros métodos que pueden ser ambiguos entre versiones de Java.
+- Siempre importa las clases que uses dentro de otra clase, valida siempre que clase clase utilizada tenga su import correspondiente.
+- Cuando asignes el resultado de un método a una variable siempre los tipos de la variable y el método deben ser compatibles.  Por ejemplo, no trates de asignar un método que retorna Iterable a una variable de tipo List.

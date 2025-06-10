@@ -1,0 +1,197 @@
+
+
+--- HISTORIA DE USUARIO ---
+id: HDU-EMP-001
+titulo: Prevenir eliminación de empleadas
+actor: Administrador del sistema
+descripcion: 
+  Como administrador del sistema,
+  quiero que no se permita eliminar empleados de género femenino,
+  para cumplir con la normativa interna de no eliminar registros históricos sensibles.
+criterios_aceptacion:
+  - Si se intenta eliminar un empleado con género "Femenino", se debe lanzar una excepción o retornar un error controlado.
+  - Si el empleado es de género "Masculino" u otro valor, se permite la eliminación normal.
+  - El método de eliminación actual debe ser modificado para incluir esta validación.
+  - No debe eliminarse ninguna lógica existente que ya esté implementada en ese método.
+  - Se deben mantener todos los métodos actuales sin eliminación ni reemplazo.
+  - La modificación debe estar delimitada por comentarios que indiquen claramente el inicio y fin del cambio realizado por la IA.
+
+id: HDU-EMP-002
+titulo: Empleados nacidos antes del 2000
+actor: Administrador del sistema
+descripcion: 
+  Como administrador del sistema
+  quiero obtener una lista de empleados que hayan nacido antes del año 2000
+  para poder segmentar a los empleados  por generaciones y aplicar políticas diferenciadas
+criterios_aceptacion:
+  - Se debe crear un nuevo end-point para esta consulta
+  - Se deben mantener todos los métodos actuales sin eliminación ni reemplazo.
+  - La modificación debe estar delimitada por comentarios que indiquen claramente el inicio y fin del cambio realizado por la IA.
+
+
+--- CLASES DISPONIBLES EN EL PROYECTO ---
+Employee
+EmployeeRepository
+EmployeeCoreApiApplication
+
+
+--- CÓDIGO EXISTENTE DEL PROYECTO ---
+
+
+// Archivo: src/main/java/test/core/api/model/Employee.java
+
+package test.core.api.model;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "employee")
+public class Employee implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	private String firstName;
+	private String middleName;
+	private String lastName;
+	private String secondLastName;
+	private Integer age;
+	private String gender;
+	private LocalDate birthDate;
+	private String position;
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getMiddleName() {
+		return middleName;
+	}
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getSecondLastName() {
+		return secondLastName;
+	}
+	public void setSecondLastName(String secondLastName) {
+		this.secondLastName = secondLastName;
+	}
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public LocalDate getBirthDate() {
+		return birthDate;
+	}
+	public void setBirthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
+	}
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
+	}
+	
+	
+	
+
+}
+
+
+// Archivo: src/main/java/test/core/api/repository/EmployeeRepository.java
+
+package test.core.api.repository;
+
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+import test.core.api.model.Employee;
+
+public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long> {
+
+    
+}
+
+
+
+
+// Archivo: src/main/java/test/core/api/EmployeeCoreApiApplication.java
+
+package test.core.api;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
+@SpringBootApplication
+@EnableAsync
+public class EmployeeCoreApiApplication {
+	
+	@Autowired
+	public static void main(String[] args) {
+		SpringApplication.run(EmployeeCoreApiApplication.class, args);
+	}
+	
+	
+}
+
+--- ANÁLISIS DE CLASES EXISTENTES ---
+Genera una tabla Markdown como esta:
+
+| Clase Java | Package | Clasificación | Motivo |
+|------------|---------|----------------|--------|
+| Employee | com.example.EmployeeCoreApi.model | REUTILIZABLE-AS-IS | Contiene atributo `gender` |
+| EmployeeServiceImpl | com.example.EmployeeCoreApi.service.impl | MODIFICABLE | Debe validar antes de borrar |
+| CannotDeleteEmployeeException | com.example.EmployeeCoreApi.exception | NUEVA | Requerida para lanzar excepción |
+| EmployeeServiceImplTest | com.example.EmployeeCoreApi.service.impl | NUEVA | Pruebas unitarias de validación |
+
+--- INSTRUCCIONES DE MODIFICACIÓN ---
+- No eliminar ni reemplazar lógica existente.
+- Si se modifica un método, incluirlo completo con el nuevo código y lo que ya tenía.
+- Solo generar clases nuevas si están indicadas como NUEVA.
+- Cada clase debe estar en su package correcto, según lo indicado en la tabla.
+- NO repetir clases ya existentes si no cambian.
+- NO eliminar los métodos existentes a menos que sea necesario
+- NO reemplazar métodos u otro contenido de las clases existentes por comentarios entre líneas
+- Solo considerar como existente una clase si está listada explícitamente en "CLASES DISPONIBLES EN EL PROYECTO".
+- No debes asumir la existencia de clases que no aparecen explícitamente en la sección anterior. Si alguna clase no está listada entre las clases disponibles ni aparece en el código entregado, debe considerarse INEXISTENTE y marcada como NUEVA en el análisis.
+- Si una clase no aparece listada, asumir que es NUEVA.
+- Si una clase herada de otra clase o importa una interfaz propia del proyecto asegúrate que esta esté entre las clases existentes o genera el código respectivo de no existir previamente
+
+--- CÓDIGO A GENERAR ---
+Devuelve solo clases Java válidas. Cada bloque debe comenzar con `package ...`.
+Incluye los tests JUnit5 en el mismo formato si aplica.

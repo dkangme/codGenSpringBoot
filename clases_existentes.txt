@@ -1,0 +1,3 @@
+src/main/java/test/core/api/model/Employee.java
+src/main/java/test/core/api/repository/EmployeeRepository.java
+src/main/java/test/core/api/EmployeeCoreApiApplication.java

@@ -1,0 +1,26 @@
+id: HDU-EMP-001
+titulo: Prevenir eliminación de empleadas
+actor: Administrador del sistema
+descripcion: 
+  Como administrador del sistema,
+  quiero que no se permita eliminar empleados de género femenino,
+  para cumplir con la normativa interna de no eliminar registros históricos sensibles.
+criterios_aceptacion:
+  - Si se intenta eliminar un empleado con género "Femenino", se debe lanzar una excepción o retornar un error controlado.
+  - Si el empleado es de género "Masculino" u otro valor, se permite la eliminación normal.
+  - El método de eliminación actual debe ser modificado para incluir esta validación.
+  - No debe eliminarse ninguna lógica existente que ya esté implementada en ese método.
+  - Se deben mantener todos los métodos actuales sin eliminación ni reemplazo.
+  - La modificación debe estar delimitada por comentarios que indiquen claramente el inicio y fin del cambio realizado por la IA.
+
+id: HDU-EMP-002
+titulo: Empleados nacidos antes del 2000
+actor: Administrador del sistema
+descripcion: 
+  Como administrador del sistema
+  quiero obtener una lista de empleados que hayan nacido antes del año 2000
+  para poder segmentar a los empleados  por generaciones y aplicar políticas diferenciadas
+criterios_aceptacion:
+  - Se debe crear un nuevo end-point para esta consulta
+  - Se deben mantener todos los métodos actuales sin eliminación ni reemplazo.
+  - La modificación debe estar delimitada por comentarios que indiquen claramente el inicio y fin del cambio realizado por la IA.

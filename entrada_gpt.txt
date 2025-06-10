@@ -28,6 +28,18 @@ criterios_aceptacion:
   - Se deben mantener todos los métodos actuales sin eliminación ni reemplazo.
   - La modificación debe estar delimitada por comentarios que indiquen claramente el inicio y fin del cambio realizado por la IA.
 
+id: HDU-EMP-003
+titulo: Empleados ordenados por posición
+actor: Administrador del sistema
+descripcion: 
+  Como administrador del sistema
+  quiero obtener una lista de empleados agrupados por posición
+  para poder segmentar a contar cuantos empledos hay en cada posición
+criterios_aceptacion:
+  - Se debe crear un nuevo end-point para esta consulta
+  - Se deben mantener todos los métodos actuales sin eliminación ni reemplazo.
+  - La modificación debe estar delimitada por comentarios que indiquen claramente el inicio y fin del cambio realizado por la IA.
+
 
 --- CLASES DISPONIBLES EN EL PROYECTO ---
 Employee
@@ -136,17 +148,14 @@ public class Employee implements Serializable {
 // Archivo: src/main/java/test/core/api/repository/EmployeeRepository.java
 
 package test.core.api.repository;
-
-import org.springframework.data.repository.PagingAndSortingRepository;
-
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import test.core.api.model.Employee;
-
-public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long> {
-
-    
+import java.util.Date;
+import java.util.List;
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 }
-
-
 
 
 // Archivo: src/main/java/test/core/api/EmployeeCoreApiApplication.java
@@ -174,7 +183,7 @@ Genera una tabla Markdown como esta:
 
 | Clase Java | Package | Clasificación | Motivo |
 |------------|---------|----------------|--------|
-| Employee | com.example.EmployeeCoreApi.model | REUTILIZABLE-AS-IS | Contiene atributo `gender` |
+| Employee | com.example.EmployeeCoreApi.model | REUTILIZABLE-AS-IS | Contiene atributo ⁠ gender ⁠ |
 | EmployeeServiceImpl | com.example.EmployeeCoreApi.service.impl | MODIFICABLE | Debe validar antes de borrar |
 | CannotDeleteEmployeeException | com.example.EmployeeCoreApi.exception | NUEVA | Requerida para lanzar excepción |
 | EmployeeServiceImplTest | com.example.EmployeeCoreApi.service.impl | NUEVA | Pruebas unitarias de validación |
@@ -193,5 +202,5 @@ Genera una tabla Markdown como esta:
 - Si una clase herada de otra clase o importa una interfaz propia del proyecto asegúrate que esta esté entre las clases existentes o genera el código respectivo de no existir previamente
 
 --- CÓDIGO A GENERAR ---
-Devuelve solo clases Java válidas. Cada bloque debe comenzar con `package ...`.
+Devuelve solo clases Java válidas. Cada bloque debe comenzar con ⁠ package ... ⁠.
 Incluye los tests JUnit5 en el mismo formato si aplica.

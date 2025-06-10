@@ -2,16 +2,17 @@
 
 | Clase Java | Package | Clasificación | Motivo |
 |------------|---------|----------------|--------|
-| Employee | test.core.api.model | REUTILIZABLE-AS-IS | Contiene atributo `gender` y `birthDate` necesarios para las historias de usuario |
-| EmployeeRepository | test.core.api.repository | MODIFICABLE | Se necesita agregar un método para obtener empleados nacidos antes del año 2000 |
-| EmployeeService | N/A | NUEVA | Se necesita para implementar la lógica de negocio |
-| EmployeeController | N/A | NUEVA | Se necesita para exponer los endpoints |
-| CannotDeleteEmployeeException | N/A | NUEVA | Se necesita para lanzar excepción cuando se intenta eliminar un empleado femenino |
-| EmployeeServiceTest | N/A | NUEVA | Pruebas unitarias para la lógica de negocio |
+| Employee | test.core.api.model | REUTILIZABLE-AS-IS | Contiene atributos necesarios para las historias de usuario |
+| EmployeeRepository | test.core.api.repository | MODIFICABLE | Se necesita agregar nuevos métodos para cumplir con las historias de usuario |
+| EmployeeCoreApiApplication | test.core.api | REUTILIZABLE-AS-IS | Clase principal de la aplicación, no necesita modificaciones |
+| EmployeeService | NUEVA | NUEVA | Se necesita una clase de servicio para implementar la lógica de negocio |
+| EmployeeController | NUEVA | NUEVA | Se necesita una clase controladora para manejar las solicitudes HTTP |
+| EmployeeServiceTest | NUEVA | NUEVA | Se necesitan pruebas unitarias para la clase EmployeeService |
+| EmployeeControllerTest | NUEVA | NUEVA | Se necesitan pruebas unitarias para la clase EmployeeController |
 
 --- INSTRUCCIONES DE MODIFICACIÓN ---
-- En la clase `EmployeeRepository`, se debe agregar un método para obtener los empleados que nacieron antes del año 2000.
-- Se debe crear la clase `EmployeeService` para implementar la lógica de negocio. Esta clase debe tener un método para eliminar empleados que lance una excepción si se intenta eliminar un empleado femenino y otro método para obtener los empleados que nacieron antes del año 2000.
-- Se debe crear la clase `EmployeeController` para exponer los endpoints. Esta clase debe tener un endpoint para eliminar empleados y otro para obtener los empleados que nacieron antes del año 2000.
-- Se debe crear la clase `CannotDeleteEmployeeException` para lanzar una excepción cuando se intenta eliminar un empleado femenino.
-- Se debe crear la clase `EmployeeServiceTest` para las pruebas unitarias de la lógica de negocio. Esta clase debe tener pruebas para los métodos de eliminar empleados y obtener los empleados que nacieron antes del año 2000.
+- En la clase EmployeeRepository, se deben agregar tres nuevos métodos: uno para prevenir la eliminación de empleados femeninos, otro para obtener empleados nacidos antes del año 2000 y otro para obtener empleados agrupados por posición.
+- Se debe crear una nueva clase EmployeeService que utilice EmployeeRepository para implementar la lógica de negocio.
+- Se debe crear una nueva clase EmployeeController que utilice EmployeeService para manejar las solicitudes HTTP.
+- Se deben crear pruebas unitarias para las clases EmployeeService y EmployeeController.
+- Todas las modificaciones y nuevas clases deben estar delimitadas por comentarios que indiquen claramente el inicio y fin del cambio realizado por la IA.

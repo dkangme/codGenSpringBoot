@@ -1,14 +1,14 @@
 {
-  "id": "chatcmpl-Bgjl9bS2NIHInlhI7qAAlQ2zx8xD6",
+  "id": "chatcmpl-BgwyxRk4IutlDrayQSpVmUycak43a",
   "object": "chat.completion",
-  "created": 1749525375,
+  "created": 1749576203,
   "model": "gpt-4-0613",
   "choices": [
     {
       "index": 0,
       "message": {
         "role": "assistant",
-        "content": "package test.core.api.repository;\n\nimport org.springframework.data.jpa.repository.JpaRepository;\nimport org.springframework.data.jpa.repository.Query;\nimport org.springframework.data.repository.query.Param;\nimport test.core.api.model.Employee;\n\nimport java.util.Date;\nimport java.util.List;\n\npublic interface EmployeeRepository extends JpaRepository<Employee, Long> {\n\n    @Query(\"SELECT e FROM Employee e WHERE e.birthDate < :date\")\n    List<Employee> findEmployeesBornBefore(@Param(\"date\") Date date);\n\n}",
+        "content": "package test.core.api.repository;\n\nimport org.springframework.data.jpa.repository.JpaRepository;\nimport org.springframework.data.jpa.repository.Query;\nimport org.springframework.data.repository.query.Param;\nimport test.core.api.model.Employee;\nimport java.util.List;\n\npublic interface EmployeeRepository extends JpaRepository<Employee, Long> {\n    @Query(\"SELECT e FROM Employee e WHERE e.gender = :gender\")\n    List<Employee> findByGender(@Param(\"gender\") String gender);\n\n    @Query(\"SELECT e FROM Employee e WHERE YEAR(e.birthDate) < :year\")\n    List<Employee> findBornBeforeYear(@Param(\"year\") int year);\n\n    @Query(\"SELECT e FROM Employee e ORDER BY e.position\")\n    List<Employee> findAllOrderByPosition();\n}",
         "refusal": null,
         "annotations": []
       },
@@ -17,9 +17,9 @@
     }
   ],
   "usage": {
-    "prompt_tokens": 307,
-    "completion_tokens": 92,
-    "total_tokens": 399,
+    "prompt_tokens": 377,
+    "completion_tokens": 141,
+    "total_tokens": 518,
     "prompt_tokens_details": {
       "cached_tokens": 0,
       "audio_tokens": 0
